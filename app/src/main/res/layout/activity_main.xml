@@ -5,7 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.routes.mobile.app.activitys.MainActivity">
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn"
+        android:text="Scan Barcode or QR code" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvresult"
+        android:textColor="#000"
+        android:layout_marginTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Result will be here"/>
     <TextView
         android:id="@+id/idTv1"
         android:layout_width="wrap_content"

@@ -11,5 +11,5 @@ import java.util.List;
 public interface IExcepcionsDAO {
 
     List<Exceptions> getAllEx() throws Exception;
-
+    List<Exceptions> getAllExByType() throws Exception;
 }

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.routes.mobile.app.activitys">
-
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera2"/>
+    <uses-permission android:name="android.permission.CAMERA" />
     <application
         android:name="com.orm.SugarApp"
         android:allowBackup="true"
@@ -17,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".ScanActivity"></activity>
         <!-- Configuración del Framework ORM, para el Uso de Entitys. -->
         <meta-data
             android:name="DATABASE"

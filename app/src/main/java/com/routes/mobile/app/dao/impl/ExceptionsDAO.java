@@ -15,4 +15,9 @@ public class ExceptionsDAO implements IExcepcionsDAO {
     public List<Exceptions> getAllEx() throws Exception {
         return Select.from(Exceptions.class).list();
     }
+
+    @Override
+    public List<Exceptions> getAllExByType() throws Exception {
+        return null;
+    }
 }
