@@ -7,7 +7,6 @@ import com.orm.SugarRecord;
  */
 
 public class Vehicle extends SugarRecord {
-    private int vehicleId;
     private String serialNumber;
     private String license;
     private String description;
@@ -15,14 +14,9 @@ public class Vehicle extends SugarRecord {
     public Vehicle(){}
 
     public Vehicle(int vehicleId,String serialNumber,String license,String description){
-        this.vehicleId=vehicleId;
         this.serialNumber=serialNumber;
         this.license=license;
         this.description=description;
-    }
-
-    public int getVehicleId() {
-        return vehicleId;
     }
 
     public String getSerialNumber() {
@@ -36,10 +30,22 @@ public class Vehicle extends SugarRecord {
     public String getDescription() {
         return description;
     }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public void setLicense(String license) {
+        this.license = license;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "Vehicle{" +
-                "VehicleId='" + vehicleId + '\'' +
                 ", SerialNumber='" + serialNumber + '\'' +
                 ", License='" + license + '\'' +
                 ", Description='" + description + '\'' +

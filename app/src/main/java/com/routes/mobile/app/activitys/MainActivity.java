@@ -7,12 +7,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.routes.mobile.app.dao.IDeliveryDAO;
 import com.routes.mobile.app.dao.IExcepcionsDAO;
+import com.routes.mobile.app.dao.impl.DeliveryDAO;
 import com.routes.mobile.app.dao.impl.ExceptionsDAO;
+import com.routes.mobile.app.model.DeliveryRoute;
+import com.routes.mobile.app.model.Vehicle;
 import com.routes.mobile.app.utils.DataBaseHelper;
 import com.routes.mobile.app.model.Exceptions;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -55,8 +60,49 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        tv1.setText("Salida:\n\n\n"+out);
 
+
+        //creamos vehiculos
+        crearVehiculos();
+        out+="************************";
+        out+="*****DELIVERY ROUTES****";
+        out+="************************";
+        out+="\n\n\n\n";
+        //Listamos las entregas con sus vehiculos asociados
+        IDeliveryDAO deliveryDAO = new DeliveryDAO();
+        List<DeliveryRoute> lstRoutes=null;
+        try{
+            lstRoutes = deliveryDAO.getAll();
+
+            for(DeliveryRoute dr : lstRoutes){
+                out+=dr+"\n\n";
+            }
+
+        }catch(Exception e){
+
+        }
+
+        tv1.setText("Salida:\n\n\n"+out);
+    }
+
+    /**
+     * Creamos una relacion "tiene un" entre un Vehicle y un DeliveryRoute
+     */
+    private void crearVehiculos(){
+
+        Vehicle vh = new Vehicle();
+        vh.setDescription("Avion");
+        vh.setLicense("AXD-TYU");
+        vh.setSerialNumber("12333333");
+        vh.save();
+
+        DeliveryRoute dr = new DeliveryRoute();
+        dr.setImei("344324234");
+        dr.setLocalEndDateTime(new Date());
+        dr.setLocalStartDateTime(new Date());
+        dr.setRouteUUID("dfsdfsdf");
+        dr.setVehicle(vh);
+        dr.save();
     }
 
     private void copyDB(){

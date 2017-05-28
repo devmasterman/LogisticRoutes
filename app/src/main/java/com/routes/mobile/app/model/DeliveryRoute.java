@@ -9,16 +9,22 @@ import java.util.Date;
  */
 
 public class DeliveryRoute extends SugarRecord {
-    private int deliveryRouteId;
     private Date localStartDateTime;
     private Date localEndDateTime;
-    private String ROUTEUUID;
-    private String IMEI;
+    private String routeUUID;
+    private String imei;
 
-    Vehicle vehicle;
+    private Vehicle vehicle; //tiene un vehicle
 
-    public int getDeliveryRouteId() {
-        return deliveryRouteId;
+    public DeliveryRoute(Date localStartDateTime, Date localEndDateTime, String routeUUID, String imei, Vehicle vehicle) {
+        this.localStartDateTime = localStartDateTime;
+        this.localEndDateTime = localEndDateTime;
+        this.routeUUID = routeUUID;
+        this.imei = imei;
+        this.vehicle = vehicle;
+    }
+
+    public DeliveryRoute() {
     }
 
     public Date getLocalStartDateTime() {
@@ -29,15 +35,46 @@ public class DeliveryRoute extends SugarRecord {
         return localEndDateTime;
     }
 
-    public String getROUTEUUID() {
-        return ROUTEUUID;
+    public String getRouteUUID() {
+        return routeUUID;
     }
 
-    public String getIMEI() {
-        return IMEI;
+    public String getImei() {
+        return imei;
     }
 
     public Vehicle getVehicle() {
         return vehicle;
+    }
+
+    public void setLocalStartDateTime(Date localStartDateTime) {
+        this.localStartDateTime = localStartDateTime;
+    }
+
+    public void setLocalEndDateTime(Date localEndDateTime) {
+        this.localEndDateTime = localEndDateTime;
+    }
+
+    public void setRouteUUID(String routeUUID) {
+        this.routeUUID = routeUUID;
+    }
+
+    public void setImei(String imei) {
+        this.imei = imei;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    @Override
+    public String toString() {
+        return "DeliveryRoute{" +
+                "localStartDateTime=" + localStartDateTime +
+                ", localEndDateTime=" + localEndDateTime +
+                ", routeUUID='" + routeUUID + '\'' +
+                ", imei='" + imei + '\'' +
+                ", vehicle=" + vehicle +
+                '}';
     }
 }
