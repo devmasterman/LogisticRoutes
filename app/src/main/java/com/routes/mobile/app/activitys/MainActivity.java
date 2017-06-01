@@ -1,6 +1,7 @@
 package com.routes.mobile.app.activitys;
 
 import android.content.Intent;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,9 @@ import com.routes.mobile.app.model.DeliveryRoute;
 import com.routes.mobile.app.model.Vehicle;
 import com.routes.mobile.app.utils.DataBaseHelper;
 import com.routes.mobile.app.model.Exceptions;
+
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.Date;
@@ -82,7 +86,11 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        out="\n\n\n"+invokeRestFul();
+
         tv1.setText("Salida:\n\n\n"+out);
+
+
     }
 
     /**
@@ -103,6 +111,32 @@ public class MainActivity extends AppCompatActivity {
         dr.setRouteUUID("dfsdfsdf");
         dr.setVehicle(vh);
         dr.save();
+    }
+
+    private String invokeRestFul(){
+        // The connection URL
+        String url = "https://ajax.googleapis.com/ajax/" +
+                "services/search/web?v=1.0&q={query}";
+        String result=null;
+        try {
+
+            //Usamos el modo estricto, esto debemos cambiarlo por un asyncTask, ya que los subprocesos
+            //de android usan hilos, debemos tener cuidado con el modo estricto
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            // Create a new RestTemplate instance
+            RestTemplate restTemplate = new RestTemplate();
+
+            // Add the String message converter
+            restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+
+            // Make the HTTP GET request, marshaling the response to a String
+             result = restTemplate.getForObject(url, String.class, "Android");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return result;
     }
 
     private void copyDB(){
