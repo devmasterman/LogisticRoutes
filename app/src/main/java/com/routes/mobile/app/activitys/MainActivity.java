@@ -21,6 +21,7 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,15 +34,21 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv1;
     public static TextView tvresult;
     private Button btn;
+    private ArrayList<String> guiasScan=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tv1 = (TextView) findViewById(R.id.idTv1);
+
         //Debemos copiar la DB por primera vez para que sea detectada por sugar ORM
         //Esto es para poder usar tablas ya creadas
         copyDB();
+
+        ArrayList<String> guiasScan = getIntent().getStringArrayListExtra("GUIAS_SCAN");
+        this.guiasScan=guiasScan;
+
 
         //Inyectamos un objeto DAO para obtener toda la lista de excepciones
         IExcepcionsDAO expDAO = new ExceptionsDAO();
@@ -88,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         out="\n\n\n"+invokeRestFul();
 
-        tv1.setText("Salida:\n\n\n"+out);
+        //tv1.setText("Salida:\n\n\n"+out);
 
 
     }
